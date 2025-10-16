@@ -31,13 +31,17 @@ export default function App() {
     });
   }
 
+  function deleteTodo(id: string) {
+    client.models.Todo.delete({ id })
+  }
+
   return (
     <main>
       <h1>My todos</h1>
       <button onClick={createTodo}>+ new</button>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
+          <li onClick={() => deleteTodo(todo.id)} key={todo.id}>{todo.content}</li>
         ))}
       </ul>
       <div>
@@ -45,6 +49,16 @@ export default function App() {
         <br />
         <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
           Review next steps of this tutorial.
+        </a>
+      </div>
+
+      <div>
+        <a href="/secret" style={{ display: "block", marginTop: 20 }}>
+          Go to Secret Page (Login Required)
+        </a>
+
+        <a href="/auth" style={{ display: "block", marginTop: 20 }}>
+          Go to Login/Register Page
         </a>
       </div>
     </main>
