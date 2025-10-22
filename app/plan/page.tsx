@@ -10,7 +10,8 @@ export default function PlanPage() {
         <h1 className="">The Plan</h1>
         <p className="">
           I plan on making a game tracker app, hopefully using an API that contains game information,
-          allowing users to make a list of games they own, have played, or want to play.
+          allowing users to make a list of games they own, have played, or want to play, that functions and 
+          looks good.
           It's not a fully fleshed-out idea yet, but that’s the general gist.
         </p>
 
