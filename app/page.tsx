@@ -42,7 +42,7 @@ export default function Page() {
       <Authenticator className="w-full max-w-md">
         {({ signOut, user }) => (
           <div className="w-full max-w-md p-6 bg-black text-white rounded-lg">
-            <h1 className="text-2xl font-bold mb-4">Welcome, {user.username}!</h1>
+            <h1 className="text-2xl font-bold mb-4">Welcome, {user?.username || "Guest"}!</h1>
 
             <h2 className="text-xl font-semibold mb-2">Game Tracker</h2>
             <button
