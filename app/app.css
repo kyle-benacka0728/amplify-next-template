@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background: linear-gradient(180deg, rgb(117, 81, 194), rgb(255, 255, 255));
+    background-color: black;
     display: flex;
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     height: 100vh;
@@ -14,10 +14,25 @@ body {
     flex-direction: column;
     align-items: stretch;
   }
+
+  h1, h2 {
+    color: white;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px;
+  }
+
+  h2 {
+    margin-left: 27%;
+    margin-right: 40%;
+  }
   
   button {
     border-radius: 8px;
     border: 1px solid transparent;
+    margin-left: 35%;
+    margin-right: 35%;
     padding: 0.6em 1.2em;
     font-size: 1em;
     font-weight: 500;
@@ -33,6 +48,19 @@ body {
   button:focus,
   button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
+  }
+
+  #add-game {
+    padding-right: 30px;
+    padding-left: 30px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+  }
+
+  #sign-out {
+    padding-right: 30px;
+    margin-top: 20px;
+    padding-left: 35px
   }
   
   ul {

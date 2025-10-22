@@ -3,64 +3,78 @@
 import { useState, useEffect } from "react";
 import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
-import "./../app/app.css";
 import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
+import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
+import "./../app/app.css";
 
 Amplify.configure(outputs);
 
 const client = generateClient<Schema>();
 
-export default function App() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+export default function Page() {
+  // Using the todo model as games
+  const [games, setGames] = useState<Array<Schema["Todo"]["type"]>>([]);
 
-  function listTodos() {
+  function listGames() {
     client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
+      next: (data) => setGames([...data.items]),
     });
   }
 
   useEffect(() => {
-    listTodos();
+    listGames();
   }, []);
 
-  function createTodo() {
-    client.models.Todo.create({
-      content: window.prompt("Todo content"),
-    });
+  function addGame() {
+    const title = window.prompt("Enter game name:");
+    if (!title) return;
+    client.models.Todo.create({ content: title });
   }
 
-  function deleteTodo(id: string) {
-    client.models.Todo.delete({ id })
+  function deleteGame(id: string) {
+    client.models.Todo.delete({ id });
   }
 
   return (
-    <main>
-      <h1>My todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li onClick={() => deleteTodo(todo.id)} key={todo.id}>{todo.content}</li>
-        ))}
-      </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
-          Review next steps of this tutorial.
-        </a>
-      </div>
+    <main className="min-h-screen flex items-center justify-center bg-black">
+      <Authenticator className="w-full max-w-md">
+        {({ signOut, user }) => (
+          <div className="w-full max-w-md p-6 bg-black text-white rounded-lg">
+            <h1 className="text-2xl font-bold mb-4">Welcome, {user.username}!</h1>
 
-      <div>
-        <a href="/secret" style={{ display: "block", marginTop: 20 }}>
-          Go to Secret Page (Login Required)
-        </a>
+            <h2 className="text-xl font-semibold mb-2">Game Tracker</h2>
+            <button
+              onClick={addGame}
+              className="bg-blue-500 text-white px-4 py-2 rounded self-center mb-4"
+              id="add-game"
+            >
+              Add Game
+            </button>
 
-        <a href="/auth" style={{ display: "block", marginTop: 20 }}>
-          Go to Login/Register Page
-        </a>
-      </div>
+            <ul className="space-y-2">
+              {games.map((game) => (
+                <li
+                  key={game.id}
+                  onClick={() => deleteGame(game.id)}
+                  className="p-2 border border-gray-700 rounded cursor-pointer hover:bg-gray-800"
+                >
+                  {game.content}
+                </li>
+              ))}
+            </ul>
+
+            <button
+              className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
+              id="sign-out"
+              onClick={signOut}
+            >
+              Sign Out
+            </button>
+          </div>
+        )}
+      </Authenticator>
     </main>
   );
 }
