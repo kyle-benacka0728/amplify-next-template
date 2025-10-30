@@ -23,9 +23,9 @@ export default function PlanPage() {
           <li>Have multiple pages with routing ☑️</li>
           <li>Pass props to and have componentized pages</li>
           <li>Use Tailwind CSS for styling</li>
-          <li>Use useState</li>
+          <li>Use useState ☑️</li>
           <li>Use an API to retrieve game information for users to use ☑️ (Half done, got API)</li>
-          <li>Use Authenticator to make some areas only signin accessible</li>
+          <li>Use Authenticator to make some areas only signin accessible ☑️</li>
           <li>Display and manage a list of games</li>
           <li>Allow adding and deleting games</li>
           <li>Navigation between Home, Plan, and Game Tracker pages</li>
