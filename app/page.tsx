@@ -39,6 +39,12 @@ export default function App() {
           View Project Plan
         </a>
       </div>
+
+      <div>
+        <a href="/games" className="">
+          View Top Games (API Demo)
+        </a>
+      </div>
     </main>
   );
 }
